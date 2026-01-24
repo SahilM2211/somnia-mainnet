@@ -1,0 +1,273 @@
+{
+	"compiler": {
+		"version": "0.8.31+commit.fd3a2265"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "partyA",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "partyB",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					}
+				],
+				"name": "AgreementCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "signer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "AgreementSigned",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "agreements",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "partyA",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "partyB",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "documentHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "signedByB",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "signedTime",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_counterparty",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_documentHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_title",
+						"type": "string"
+					}
+				],
+				"name": "createAgreement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getAgreement",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "partyA",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "partyB",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "docHash",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "isSigned",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timeCreated",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timeSigned",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAgreementCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "signAgreement",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "A smart contract to cryptographically sign agreements. 1. Party A proposes an agreement (stores the Hash of the text). 2. Party B signs it. 3. The contract proves that both parties agreed to the EXACT text at a specific time. Deployment: Easy (No inputs).",
+			"kind": "dev",
+			"methods": {
+				"createAgreement(address,string,string)": {
+					"details": "Create a new agreement for someone else to sign.",
+					"params": {
+						"_counterparty": "The wallet address of the person you are making a deal with.",
+						"_documentHash": "The hash of the text/file (calculated off-chain).",
+						"_title": "A short descriptive title."
+					}
+				},
+				"signAgreement(uint256)": {
+					"details": "The counterparty calls this to sign the deal."
+				}
+			},
+			"title": "DigitalNotary",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"base mainnet/Notary Contract.sol": "DigitalNotary"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"base mainnet/Notary Contract.sol": {
+			"keccak256": "0x803c44532971cec11d7cc7e2f0b56b75228e66933dbd055726ee758100090793",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b76f0e40ab01236836ad6881c897c7c80ffce9e3c932203702c7da951ff6e9da",
+				"dweb:/ipfs/QmYK64VojAS6Dzj3eDmiNFtuE8MoG8f9pfHYRfoB4qR3Hh"
+			]
+		}
+	},
+	"version": 1
+}
